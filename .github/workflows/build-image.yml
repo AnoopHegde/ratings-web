@@ -7,6 +7,9 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+env:
+  IMAGE_NAME: "ratings-web"
+  
 jobs:
   build_push_image:
     runs-on: pe-arc-runner-shared-npd
@@ -32,7 +35,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: ./
-          tags: ${{secrets.ACR_NAME}}/ratings-web:v1
+          tags: ${{secrets.ACR_NAME}}/${{ env.IMAGE_NAME }}:v1
           push: true
           labels: ${{ steps.meta.outputs.labels }}
           build-args: GITHUB_PAT=${{ secrets.GH_IAC_PAT }}
