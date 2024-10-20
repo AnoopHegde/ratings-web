@@ -34,8 +34,8 @@ jobs:
       - name: Build and push staging images
         uses: docker/build-push-action@v3
         with:
-          context: ./
-          tags: ${{secrets.ACR_NAME}}/${{ env.IMAGE_NAME }}:v1
+          context: .
+          tags: ${{vars.REGISTRY}}/${{ env.IMAGE_NAME }}:v1
           push: true
           labels: ${{ steps.meta.outputs.labels }}
           build-args: GITHUB_PAT=${{ secrets.GH_IAC_PAT }}
